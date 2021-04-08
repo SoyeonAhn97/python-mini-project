@@ -1,38 +1,33 @@
 import requests
 from bs4 import BeautifulSoup
-
+URL = 'https://ecampus.kangnam.ac.kr/'
 LOGIN_URL = 'https://ecampus.kangnam.ac.kr/login.php'
-# LOGIN_DATA = {
-#     'id': 'input-username',
-#     'pwd': 'input-password'
-# }
 LOGIN_HEADER = {
     'Referer': 'https://ecampus.kangnam.ac.kr/',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                  'AppleWebKit/537.36 (KHTML, like Gecko) '
                   'Chrome/86.0.4240.198 Whale/2.9.115.16 Safari/537.36'
 }
-
-##예시
 LOGIN_DATA = {
-    'i6Ba4SXL8CY3xDMc':'Blablabla',
-    'password':'Your Password',
-    'user_id':'Your Id',
-    's_url':'//www.dcinside.com/',
-    'ssl':'Y'
+    'input-username' : '201704049',
+    'input-password' : '****'
 }
 
+# Session 생성, with 구문 안에서 세션 유지, with를 벗어나면 자동으로 세션 종료
+with requests.Session() as s:
+    # 로그인 시도
+    login_req = s.post(LOGIN_URL, data=LOGIN_DATA, allow_redirects=False)
+    # 로그인 결과 : 200이 나오면 성공!
+    print(login_req.status_code)
+    # 로그인 실패 시 : 200이 안나오면 실패
+    if login_req.status_code != 200:
+        print('로그인 실패')
 
-# with requests.session() as s:
-#     res = s.post(LOGIN_URL, data=LOGIN_DATA, verify=False)
+    #cookie = login_req.headers['Set-Cookie']
+    #print(cookie)
 
-
-URL = 'https://ecampus.kangnam.ac.kr'
-
-response = requests.get(URL)
-if response: #response null check
-    print("response status code : ", response.status_code)
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')
+    # 페이지 html 가져오기
+    url_html = s.get(URL)
+    # soup 만들기
+    soup = BeautifulSoup(url_html.text, 'html.parser')
     print(soup)
-else:
-    print("response is null")
