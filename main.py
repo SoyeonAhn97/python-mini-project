@@ -17,11 +17,11 @@ LOGIN_DATA = {
 with requests.Session() as s:
     # 로그인 시도
     login_req = s.post(LOGIN_URL, data=LOGIN_DATA, allow_redirects=False)
-    # 로그인 결과 : 200이 나오면 성공!
+    # 로그인 결과 : 200이 나오면 request 날리기 성공!
     print(login_req.status_code)
-    # 로그인 실패 시 : 200이 안나오면 실패
+    # 로그인 실패 시 : 200이 안나오면 request 날리기 실패
     if login_req.status_code != 200:
-        print('로그인 실패')
+        print('request 실패')
 
     #cookie = login_req.headers['Set-Cookie']
     #print(cookie)
