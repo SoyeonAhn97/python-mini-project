@@ -36,7 +36,7 @@ with requests.Session() as s:
     print("********cookie********")
     print(cookie)
     # session의 header 안에 MoodleSession 쿠키를 추가합니다.
-    #response.add_header('Cookie', cookie)
+    #response.add_header('Cookie', cookie) # 이건 urllib2 문법인듯ㅜㅜ
 
     # 여기서부턴 로그인이 된 세션이 유지됩니다. session 의 header 에는 Cookie 의 MoodleSession ID가 들어갑니다.
     response = s.get(URL)
