@@ -11,7 +11,7 @@ LOGIN_HEADER = {
 }
 LOGIN_DATA = {
     'input-username': '201704049',
-    'input-password': '*a34013401'
+    'input-password': '****'
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
