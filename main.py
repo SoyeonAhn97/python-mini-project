@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, ResultSet
 
 URL = 'https://ecampus.kangnam.ac.kr/'
 LOGIN_URL = 'https://ecampus.kangnam.ac.kr/login/index.php'
@@ -31,4 +31,22 @@ with requests.Session() as s:
     soup = BeautifulSoup(page.text, 'html.parser')
     #print(soup)
 
-     
+    # a태그 찾기
+    courseLinkTag = soup.select('.course_label_re_03 a')
+    coursePage = list()
+    attendBox = list()
+
+    # a태그 속 href 로 세션만들기
+    for courseLink in courseLinkTag:
+        print(courseLink.get('href'))
+        coursePage.append(s.get(courseLink.get('href')))
+
+    # 교과목 페이지에서 진도 현황 가져오기
+    for page in coursePage:
+        print(page.text.find('김태권'))
+        html = BeautifulSoup(page.text, 'html.parser')
+        attendBox = html.select('div.user_attendance.course_box')
+
+    # 진도 현황 가져와졌는지 출력해보
+    for div in attendBox:
+        print(div)
