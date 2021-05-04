@@ -9,7 +9,7 @@ LOGIN_HEADER = {
 }
 LOGIN_DATA = {
     'username' :  "201704049",
-    'password': "****"
+    'password': "*a34013401"
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
@@ -45,8 +45,8 @@ with requests.Session() as s:
     for page in coursePage:
         print(page.text.find('김태권'))
         html = BeautifulSoup(page.text, 'html.parser')
-        attendBox = html.select('div.user_attendance.course_box')
+        attendBox.append(html.select('.user_attendance_table'))
 
-    # 진도 현황 가져와졌는지 출력해보
+    # 진도 현황 가져와졌는지 출력해보기
     for div in attendBox:
         print(div)
