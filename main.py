@@ -1,4 +1,6 @@
+import os
 import requests
+import webbrowser
 from bs4 import BeautifulSoup
 
 URL = 'https://ecampus.kangnam.ac.kr/'
@@ -9,9 +11,17 @@ LOGIN_HEADER = {
                   'AppleWebKit/537.36 (KHTML, like Gecko) '
                   'Chrome/90.0.4430.85 Safari/537.36'
 }
+CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=1620358043&type=all'
+
+# LOGIN_DATA = {
+#     'username': input("username : "),
+#     'password': input("password : ")
+# }
+
+#*** 테스트용 ***#
 LOGIN_DATA = {
-    'username': input("username : "),
-    'password': input("password : ")
+    'username': '201704049',
+    'password': '*a34013401'
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
@@ -33,6 +43,12 @@ with requests.Session() as s:
     soup = BeautifulSoup(page.text, 'html.parser')
     # print(soup)
 
+    #************ 테스트 중 **********#
+    f = open("test.html", "w")
+    f.write(page.text)
+    f.close()
+    #*******************************#
+
     # a태그 찾기
     courseLinkTag = soup.select('.course_label_re_03 a')
     coursePage = list()
@@ -52,3 +68,9 @@ with requests.Session() as s:
     # 진도 현황 가져와졌는지 출력해보기
     for div in attendBox:
         print(div)
+
+    # CSS 가져와서 css.text 에 저장
+    css = s.get(CSS_URL)
+    f = open("css.txt", "w")
+    f.write(css.text)
+    f.close()
