@@ -44,7 +44,7 @@ with requests.Session() as s:
     # print(soup)
 
     #************ 테스트 중 **********#
-    f = open("test.html", "w")
+    f = open("test.html", "w", encoding="utf-8")
     f.write(page.text)
     f.close()
     #*******************************#
@@ -71,6 +71,6 @@ with requests.Session() as s:
 
     # CSS 가져와서 css.text 에 저장
     css = s.get(CSS_URL)
-    f = open("css.txt", "w")
+    f = open("css.txt", "w", encoding="utf-8")
     f.write(css.text)
     f.close()
