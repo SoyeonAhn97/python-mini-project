@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup, ResultSet
+from bs4 import BeautifulSoup
 
 URL = 'https://ecampus.kangnam.ac.kr/'
 LOGIN_URL = 'https://ecampus.kangnam.ac.kr/login/index.php'
@@ -8,8 +8,8 @@ LOGIN_HEADER = {
      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36'
 }
 LOGIN_DATA = {
-    'username' :  "201704049",
-    'password': "*a34013401"
+    'username' : input("username : "),
+    'password' : input("password : ")
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
@@ -43,7 +43,7 @@ with requests.Session() as s:
 
     # 교과목 페이지에서 진도 현황 가져오기
     for page in coursePage:
-        print(page.text.find('김태권'))
+        print(page.text.find('허지'))
         html = BeautifulSoup(page.text, 'html.parser')
         attendBox.append(html.select('.user_attendance_table'))
 
