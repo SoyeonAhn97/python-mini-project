@@ -21,7 +21,7 @@ CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=
 #*** 테스트용 ***#
 LOGIN_DATA = {
     'username': '201704049',
-    'password': '*a34013401'
+    'password': '****'
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
