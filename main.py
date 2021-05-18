@@ -21,7 +21,7 @@ CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=
 #*** 테스트용 ***#
 LOGIN_DATA = {
     'username': '201704049',
-    'password': '****'
+    'password': '*a34013401'
 }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
@@ -91,7 +91,7 @@ with requests.Session() as s:
 
     # 강좌 전체보기 버튼 위에 attendBox 붙이기
     for tag in soupAttendBox.select(".user_attendance_table") :
-        soup.select(".progress_courses").insert_before(tag)
-
-
-    print(soup)
+        #soup.find(".progress_courses").insert_before(tag)
+        tt = soup.find(".progress_courses")
+        print(tt)
+    #print(soup)
