@@ -74,3 +74,24 @@ with requests.Session() as s:
     f = open("css.txt", "w", encoding="utf-8")
     f.write(css.text)
     f.close()
+
+    # attendBox 를 attendBox.txt 파일로 저장
+    f = open("attendBox.txt", "w", encoding="utf-8")
+    f.write("")
+    f = open("attendBox.txt", "a", encoding="utf-8")
+    for div in attendBox:
+        f.write(str(div))
+    f.close()
+
+    # attendBox.txt 파일을 soup 으로 만듬
+    f = open("attendBox.txt", "r", encoding="utf-8")
+    soupAttendBox = BeautifulSoup(f.read(), 'html.parser')
+    f.close()
+    print(soupAttendBox)
+
+    # 강좌 전체보기 버튼 위에 attendBox 붙이기
+    for tag in soupAttendBox.select(".user_attendance_table") :
+        soup.select(".progress_courses").insert_before(tag)
+
+
+    print(soup)
