@@ -42,7 +42,6 @@ with requests.Session() as s:
     # soup 만들기
     soup = BeautifulSoup(page.text, 'html.parser')
     # print(soup)
-
     #************ 테스트 중 **********#
     f = open("test.html", "w", encoding="utf-8")
     f.write(page.text)
@@ -91,8 +90,8 @@ with requests.Session() as s:
 
     # 강좌 전체보기 버튼 위에 attendBox 붙이기
     for tag in soupAttendBox.select(".user_attendance_table") :
-        #soup.find(".progress_courses").insert_before(tag)
-        tt = soup.find(".progress_courses")
-        print(tt)
+        soup.select_one(".progress_courses").insert_before(tag)
 
-    #print(soup)
+    f = open("test1.html", "w", encoding="utf-8")
+    f.write(str(soup))
+    f.close()
