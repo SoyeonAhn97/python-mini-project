@@ -94,4 +94,5 @@ with requests.Session() as s:
         #soup.find(".progress_courses").insert_before(tag)
         tt = soup.find(".progress_courses")
         print(tt)
+
     #print(soup)
