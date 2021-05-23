@@ -1,4 +1,4 @@
-import os
+import platform
 import requests
 import webbrowser
 from bs4 import BeautifulSoup
@@ -13,16 +13,16 @@ LOGIN_HEADER = {
 }
 CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=1620358043&type=all'
 
-# LOGIN_DATA = {
-#     'username': input("username : "),
-#     'password': input("password : ")
-# }
-
-#*** 테스트용 ***#
 LOGIN_DATA = {
-    'username': '201704049',
-    'password': '*a34013401'
+    'username': input("username : "),
+    'password': input("password : ")
 }
+
+# #*** 테스트용 ***#
+# LOGIN_DATA = {
+#     'username': '201704049',
+#     'password': '****'
+# }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
 with requests.Session() as s:
@@ -62,7 +62,7 @@ with requests.Session() as s:
     for page in coursePage:
         print(page.text.find('허지욱'))
         html = BeautifulSoup(page.text, 'html.parser')
-        attendBox.append(html.select('.user_attendance_table'))
+        attendBox.append(html.select('.user_attendance.course_box'))
 
     # 진도 현황 가져와졌는지 출력해보기
     for div in attendBox:
@@ -89,9 +89,28 @@ with requests.Session() as s:
     print(soupAttendBox)
 
     # 강좌 전체보기 버튼 위에 attendBox 붙이기
-    for tag in soupAttendBox.select(".user_attendance_table") :
+    for tag in soupAttendBox.select(".user_attendance.course_box") :
         soup.select_one(".progress_courses").insert_before(tag)
 
-    f = open("test1.html", "w", encoding="utf-8")
+    f = open("reformPage.html", "w", encoding="utf-8")
     f.write(str(soup))
     f.close()
+
+    # MacOS
+    chrome_path_mac = 'open -a /Applications/Google\ Chrome.app %s'
+    # Windows
+    chrome_path_windows = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+    # Linux
+    chrome_path_linux = '/usr/bin/google-chrome %s'
+
+    # Mac : 'Darwin', Windows : 'Windows', Linux : 'Linux'
+    os = platform.system()
+
+    if os == 'Darwin':
+        webbrowser.get(chrome_path_mac).open('reformPage.html')
+    elif os == 'Windows':
+        webbrowser.get(chrome_path_windows).open('reformPage.html')
+    elif os == 'Linux':
+        webbrowser.get(chrome_path_linux).open('reformPage.html')
+    else:
+        print("운영체제를 찾지 못했습니다.")
