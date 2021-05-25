@@ -97,7 +97,7 @@ with requests.Session() as s:
     # 출석 횟수에 css 적용하기
     print("*** 출석 횟수에 css 적용하기 ***")
     for i in range(0, len(attendCountList)):
-        soupAttendCountList.select("div")[i]['style'] = "color: blue; font-weight: bold; font-family: 'NanumGothic'; text-align: left; width: 400px;"
+        soupAttendCountList.select("div")[i]['style'] = "color: #384de8; font-weight: bold; font-family: 'NanumGothic'; text-align: left; width: 400px;"
     for i in range(0, len(attendCountList) * 2):
         soupAttendCountList.select("p")[i]['style'] = "height: 20px; width: 70px; text-align: center; display: inline-block;"
 
