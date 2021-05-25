@@ -86,11 +86,17 @@ with requests.Session() as s:
     f = open("attendCountList.txt", "r", encoding="utf-8")
     soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
     f.close()
-    print(soupAttendCountList)
+    # print(soupAttendCountList)
 
     # 각 강좌 버튼에 출석 횟수 붙이기
+    print("각 강좌 버튼에 출석 횟수 붙이기")
+    i = 0
     for course in soup.select(".course_label_re_03"):
-        course.append(soupAttendCountList.select(".att_count")[0])
+        print('[', int(i), ']')
+        course.append(soupAttendCountList.select(".att_count")[i])
+        #print(soupAttendCountList.select(".att_count")[i])
+        #i += 1
+
 
     f = open("reformPage.html", "w", encoding="utf-8")
     f.write(str(soup))
@@ -114,5 +120,3 @@ with requests.Session() as s:
         webbrowser.get(chrome_path_linux).open('reformPage.html')
     else:
         print("운영체제를 찾지 못했습니다.")
-
-
