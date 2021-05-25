@@ -42,30 +42,30 @@ with requests.Session() as s:
     # soup 만들기
     soup = BeautifulSoup(page.text, 'html.parser')
     # print(soup)
-    #************ 테스트 중 **********#
+    # ************ 테스트 중 **********#
     f = open("test.html", "w", encoding="utf-8")
     f.write(page.text)
     f.close()
-    #*******************************#
+    # *******************************#
 
     # a태그 찾기
     courseLinkTag = soup.select('.course_label_re_03 a')
-    coursePage = list()
-    attendBox = list()
+    coursePageList = list()
+    attendCountList = list()
 
     # a태그 속 href 로 세션만들기
     for courseLink in courseLinkTag:
         print(courseLink.get('href'))
-        coursePage.append(s.get(courseLink.get('href')))
+        coursePageList.append(s.get(courseLink.get('href')))
 
     # 교과목 페이지에서 진도 현황 가져오기
-    for page in coursePage:
+    for page in coursePageList:
         print(page.text.find('허지욱'))
         html = BeautifulSoup(page.text, 'html.parser')
-        attendBox.append(html.select('.user_attendance.course_box'))
+        attendCountList.append(html.select('.att_count'))
 
     # 진도 현황 가져와졌는지 출력해보기
-    for div in attendBox:
+    for div in attendCountList:
         print(div)
 
     # CSS 가져와서 css.text 에 저장
@@ -74,23 +74,23 @@ with requests.Session() as s:
     f.write(css.text)
     f.close()
 
-    # attendBox 를 attendBox.txt 파일로 저장
-    f = open("attendBox.txt", "w", encoding="utf-8")
+    # attendCountList 를 attendCountList.txt 파일로 저장
+    f = open("attendCountList.txt", "w", encoding="utf-8")
     f.write("")
-    f = open("attendBox.txt", "a", encoding="utf-8")
-    for div in attendBox:
+    f = open("attendCountList.txt", "a", encoding="utf-8")
+    for div in attendCountList:
         f.write(str(div))
     f.close()
 
-    # attendBox.txt 파일을 soup 으로 만듬
-    f = open("attendBox.txt", "r", encoding="utf-8")
-    soupAttendBox = BeautifulSoup(f.read(), 'html.parser')
+    # attendCountList.txt 파일을 soup 으로 만듬
+    f = open("attendCountList.txt", "r", encoding="utf-8")
+    soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
     f.close()
-    print(soupAttendBox)
+    print(soupAttendCountList)
 
-    # 강좌 전체보기 버튼 위에 attendBox 붙이기
-    for tag in soupAttendBox.select(".user_attendance.course_box") :
-        soup.select_one(".progress_courses").insert_before(tag)
+    # 각 강좌 버튼에 출석 횟수 붙이기
+    for course in soup.select(".course_label_re_03"):
+        course.append(soupAttendCountList.select(".att_count")[0])
 
     f = open("reformPage.html", "w", encoding="utf-8")
     f.write(str(soup))
@@ -114,3 +114,5 @@ with requests.Session() as s:
         webbrowser.get(chrome_path_linux).open('reformPage.html')
     else:
         print("운영체제를 찾지 못했습니다.")
+
+
