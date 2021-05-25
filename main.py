@@ -95,11 +95,15 @@ with requests.Session() as s:
     f.close()
 
     # 출석 횟수에 css 적용하기
+    div_css = "color: #384de8; font-weight: bold; " \
+              "font-family: 'NanumGothic'; text-align: left; width: 400px;"
+    p_css = "height: 20px; width: 70px; text-align: center; display: inline-block;"
+
     print("*** 출석 횟수에 css 적용하기 ***")
     for i in range(0, len(attendCountList)):
-        soupAttendCountList.select("div")[i]['style'] = "color: #384de8; font-weight: bold; font-family: 'NanumGothic'; text-align: left; width: 400px;"
+        soupAttendCountList.select("div")[i]['style'] = div_css
     for i in range(0, len(attendCountList) * 2):
-        soupAttendCountList.select("p")[i]['style'] = "height: 20px; width: 70px; text-align: center; display: inline-block;"
+        soupAttendCountList.select("p")[i]['style'] = p_css
 
     # 각 강좌 버튼에 출석 횟수 붙이기
     print("*** 각 강좌 버튼에 출석 횟수 붙이기 ***")
