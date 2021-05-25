@@ -115,3 +115,4 @@ with requests.Session() as s:
     else:
         print("운영체제를 찾지 못했습니다.")
 
+
