@@ -13,16 +13,16 @@ LOGIN_HEADER = {
 }
 CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=1620358043&type=all'
 
-# LOGIN_DATA = {
-#     'username': input("username : "),
-#     'password': input("password : ")
-# }
+LOGIN_DATA = {
+    'username': input("username : "),
+    'password': input("password : ")
+}
 
 # #*** 테스트용 ***#
-LOGIN_DATA = {
-    'username': '201704049',
-    'password': '*a34013401'
-}
+# LOGIN_DATA = {
+#     'username': '201704049',
+#     'password': '****'
+# }
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
 with requests.Session() as s:
