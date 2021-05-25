@@ -13,16 +13,16 @@ LOGIN_HEADER = {
 }
 CSS_URL = 'https://ecampus.kangnam.ac.kr/theme/styles.php?theme=coursemosv2&rev=1620358043&type=all'
 
-LOGIN_DATA = {
-    'username': input("username : "),
-    'password': input("password : ")
-}
+# LOGIN_DATA = {
+#     'username': input("username : "),
+#     'password': input("password : ")
+# }
 
 # #*** 테스트용 ***#
-# LOGIN_DATA = {
-#     'username': '201704049',
-#     'password': '****'
-# }
+LOGIN_DATA = {
+    'username': '201704049',
+    'password': '*a34013401'
+}
 
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
 with requests.Session() as s:
@@ -30,51 +30,57 @@ with requests.Session() as s:
     response = s.post(LOGIN_URL, headers=LOGIN_HEADER, data=LOGIN_DATA)
 
     # 200이 나오면 정상 응답
-    print(response.status_code)
+    print("response.status_code :", response.status_code)
 
     # 이러닝홈페이지를 GET방식으로 가져옵니다.
+    print("*** 이러닝홈페이지를 GET방식으로 가져옵니다. ***")
     page = s.get(URL)
 
     # 로그인이 정상적으로 되었는지 확인용도
-    # print(page.text)
+    print("*** 로그인 성공 여부(-1은 실패) ***")
     print(page.text.find('로그아웃'))
 
-    # soup 만들기
+    # 기존 메인 페이지 soup 만들기
+    print("*** 기존 메인 페이지 soup 만들기 ***")
     soup = BeautifulSoup(page.text, 'html.parser')
-    # print(soup)
-    # ************ 테스트 중 **********#
-    f = open("test.html", "w", encoding="utf-8")
-    f.write(page.text)
-    f.close()
-    # *******************************#
+
+    # f = open("originPage.html", "w", encoding="utf-8")
+    # f.write(page.text)
+    # f.close()
 
     # a태그 찾기
+    print("*** a태그 찾기 ***")
     courseLinkTag = soup.select('.course_label_re_03 a')
     coursePageList = list()
     attendCountList = list()
 
     # a태그 속 href 로 세션만들기
+    print("*** a태그 속 href 로 세션만들기 ***")
     for courseLink in courseLinkTag:
         print(courseLink.get('href'))
         coursePageList.append(s.get(courseLink.get('href')))
 
     # 교과목 페이지에서 진도 현황 가져오기
+    print("*** 교과목 페이지에서 진도 현황 가져오기 ***")
     for page in coursePageList:
         print(page.text.find('허지욱'))
         html = BeautifulSoup(page.text, 'html.parser')
         attendCountList.append(html.select('.att_count'))
 
     # 진도 현황 가져와졌는지 출력해보기
+    print("*** 진도 현황 가져와졌는지 출력해보기 ***")
     for div in attendCountList:
         print(div)
 
     # CSS 가져와서 css.text 에 저장
+    print("*** CSS 가져와서 css.text 에 저장 ***")
     css = s.get(CSS_URL)
     f = open("css.txt", "w", encoding="utf-8")
     f.write(css.text)
     f.close()
 
     # attendCountList 를 attendCountList.txt 파일로 저장
+    print("*** attendCountList 를 attendCountList.txt 파일로 저장 ***")
     f = open("attendCountList.txt", "w", encoding="utf-8")
     f.write("")
     f = open("attendCountList.txt", "a", encoding="utf-8")
@@ -83,21 +89,26 @@ with requests.Session() as s:
     f.close()
 
     # attendCountList.txt 파일을 soup 으로 만듬
+    print("*** attendCountList.txt 파일을 soup 으로 만듬 ***")
     f = open("attendCountList.txt", "r", encoding="utf-8")
     soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
     f.close()
-    # print(soupAttendCountList)
+
+    # 출석 횟수에 css 적용하기
+    print("*** 출석 횟수에 css 적용하기 ***")
+    for i in range(0, len(attendCountList)):
+        soupAttendCountList.select("div")[i]['style'] = "color: blue; font-weight: bold; font-family: 'NanumGothic'; text-align: left; width: 400px;"
+    for i in range(0, len(attendCountList) * 2):
+        soupAttendCountList.select("p")[i]['style'] = "height: 20px; width: 70px; text-align: center; display: inline-block;"
 
     # 각 강좌 버튼에 출석 횟수 붙이기
-    print("각 강좌 버튼에 출석 횟수 붙이기")
-    i = 0
+    print("*** 각 강좌 버튼에 출석 횟수 붙이기 ***")
     for course in soup.select(".course_label_re_03"):
-        print('[', int(i), ']')
-        course.append(soupAttendCountList.select(".att_count")[i])
-        #print(soupAttendCountList.select(".att_count")[i])
-        #i += 1
+        print(soupAttendCountList.select(".att_count")[0])
+        course.append(soupAttendCountList.select(".att_count")[0])
 
-
+    # reformPage.html로 저장
+    print("*** reformPage.html로 저장 ***")
     f = open("reformPage.html", "w", encoding="utf-8")
     f.write(str(soup))
     f.close()
@@ -111,7 +122,9 @@ with requests.Session() as s:
 
     # Mac : 'Darwin', Windows : 'Windows', Linux : 'Linux'
     os = platform.system()
+    print("os :", os)
 
+    print("*** 창 열림 ***")
     if os == 'Darwin':
         webbrowser.get(chrome_path_mac).open('reformPage.html')
     elif os == 'Windows':
