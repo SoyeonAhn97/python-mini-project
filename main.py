@@ -110,8 +110,18 @@ with requests.Session() as s:
     f.close()
 
     # 출석 횟수에 css 적용하기
-    div_css = "color: #384de8; font-weight: bold; " \
-              "font-family: 'NanumGothic'; text-align: left; width: 400px;"
+    div_css = "box-sizing : border-box; color : rgb(51, 51, 51); " \
+              "font-family : NanumGothic; font-size : 14px; " \
+              "line-height : 20px; text-size-adjust : 100%; width : 100%;"
+
+    ul_css = "border-top-color : rgb(235, 235, 235); " \
+             "border-top-style : solid; border-top-width : 1px; " \
+             "border-bottom-color : rgb(235, 235, 235); " \
+             "border-bottom-style : solid; border-bottom-width : 1px; " \
+             "box-sizing : border-box; color : rgb(51, 51, 51); " \
+             "line-height : 20px; list-style-image : none; " \
+             "list-style-position : outside; list-style-type : none;"
+
     p_css = "height: 20px; width: 70px; text-align: center; display: inline-block;"
 
     print("*** 출석 횟수에 css 적용하기 ***")
