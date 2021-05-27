@@ -109,7 +109,7 @@ with requests.Session() as s:
     soupAttendTableList = BeautifulSoup(f.read(), 'html.parser')
     f.close()
 
-    # 출석 횟수에 css 적용하기
+    # css 적용하기
     div_css = "box-sizing : border-box; color : rgb(51, 51, 51); " \
               "font-family : NanumGothic; font-size : 14px; " \
               "line-height : 20px; text-size-adjust : 100%; width : 100%;"
@@ -122,19 +122,46 @@ with requests.Session() as s:
              "line-height : 20px; list-style-image : none; " \
              "list-style-position : outside; list-style-type : none;"
 
-    p_css = "height: 20px; width: 70px; text-align: center; display: inline-block;"
+    li_active_css = "background-color : rgb(255, 255, 255); " \
+                    "border-right-color : rgb(235, 235, 235); " \
+                    "border-right-style : solid; border-right-width : 1px; " \
+                    "box-sizing : border-box; color : rgb(42, 123, 205); " \
+                    "display : list-item; float : left; font-weight : 600; " \
+                    "height : 80px;"
 
-    print("*** 출석 횟수에 css 적용하기 ***")
+    li_inactive_css = "box-sizing : border-box; display : list-item; " \
+                      "float : left; height : 80px; width : 38.75px; " \
+                      "font-size : 12px; font-weight : 600; line-height : 17.1429.px; " \
+                      "text-align : center; text-size-adjust : 100%; " \
+                      "color : rgb(153, 153, 153); background-color : rgb(245, 245, 246); " \
+                      "border-right-color : rgb(235, 235, 235); border-right-style : solid; " \
+                      "border-right-width : 1px; list-style-image : none; list-style-position : outside;"
+
+    p_active_css = ""
+
+    p_inactive_css = ""
+
+    # att_count 하위 css 필요
+    # ...
+
+
+
+    print("*** css 적용하기 ***")
     for i in range(0, len(attendTableList)):
-        soupAttendTableList.select("div")[i]['style'] = div_css
-    for i in range(0, len(attendTableList) * 2):
-        soupAttendTableList.select("p")[i]['style'] = p_css
+        soupAttendTableList.select(".user_attendance_table")[i]['style'] = div_css
+    for i in range(0, len(attendTableList)):
+        soupAttendTableList.select(".attendance")[i]['style'] = ul_css
+    for i in range(0, len(attendTableList) * 16):
+        # if li .class가 active 일 때
+        # p_active_css 적용
+        # else (inactive) 일 때
+        # p_inactive_css 적용
 
-    # 각 강좌 버튼에 출석 횟수 붙이기
-    print("*** 각 강좌 버튼에 출석 횟수 붙이기 ***")
+    # 각 강좌 버튼에 진도 현황 붙이기
+    print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
     for course in soup.select(".course_label_re_03"):
-        print(soupAttendTableList.select(".att_count")[0])
-        course.append(soupAttendTableList.select(".att_count")[0])
+        print(soupAttendTableList.select(".user_attendance_table")[0])
+        course.append(soupAttendTableList.select(".user_attendance_table")[0])
 
     # reformPage.html로 저장
     print("*** reformPage.html로 저장 ***")
