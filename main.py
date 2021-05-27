@@ -52,7 +52,7 @@ with requests.Session() as s:
     print("*** a태그 찾기 ***")
     courseLinkTag = soup.select('.course_label_re_03 a')
     coursePageList = list()
-    attendCountList = list()
+    #attendCountList = list()
     attendTableList = list()
     # a태그 속 href 로 세션만들기
     print("*** a태그 속 href 로 세션만들기 ***")
@@ -65,33 +65,48 @@ with requests.Session() as s:
     for page in coursePageList:
         print(page.text.find('허지욱'))
         html = BeautifulSoup(page.text, 'html.parser')
-        attendCountList.append(html.select('.att_count'))
-
+        #attendCountList.append(html.select('.att_count'))
+        attendTableList.append(html.select('.user_attendance_table'))
     # 진도 현황 가져와졌는지 출력해보기
     print("*** 진도 현황 가져와졌는지 출력해보기 ***")
-    for div in attendCountList:
+    for div in attendTableList:
         print(div)
 
     # CSS 가져와서 css.text 에 저장
-    print("*** CSS 가져와서 css.text 에 저장 ***")
-    css = s.get(CSS_URL)
-    f = open("css.txt", "w", encoding="utf-8")
-    f.write(css.text)
-    f.close()
+    # print("*** CSS 가져와서 css.text 에 저장 ***")
+    # css = s.get(CSS_URL)
+    # f = open("css.txt", "w", encoding="utf-8")
+    # f.write(css.text)
+    # f.close()
 
     # attendCountList 를 attendCountList.txt 파일로 저장
-    print("*** attendCountList 를 attendCountList.txt 파일로 저장 ***")
-    f = open("attendCountList.txt", "w", encoding="utf-8")
+    # print("*** attendCountList 를 attendCountList.txt 파일로 저장 ***")
+    # f = open("attendCountList.txt", "w", encoding="utf-8")
+    # f.write("")
+    # f = open("attendCountList.txt", "a", encoding="utf-8")
+    # for div in attendCountList:
+    #     f.write(str(div))
+    # f.close()
+
+    # attendTableList 를 attendTableList.txt 파일로 저장
+    print("*** attendTableList 를 attendTableList.txt 파일로 저장 ***")
+    f = open("attendTableList.txt", "w", encoding="utf-8")
     f.write("")
-    f = open("attendCountList.txt", "a", encoding="utf-8")
-    for div in attendCountList:
+    f = open("attendTableList.txt", "a", encoding="utf-8")
+    for div in attendTableList:
         f.write(str(div))
     f.close()
 
     # attendCountList.txt 파일을 soup 으로 만듬
-    print("*** attendCountList.txt 파일을 soup 으로 만듬 ***")
-    f = open("attendCountList.txt", "r", encoding="utf-8")
-    soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
+    # print("*** attendCountList.txt 파일을 soup 으로 만듬 ***")
+    # f = open("attendCountList.txt", "r", encoding="utf-8")
+    # soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
+    # f.close()
+
+    # attendTableList.txt 파일을 soup 으로 만듬
+    print("*** attendTableList.txt 파일을 soup 으로 만듬 ***")
+    f = open("attendTableList.txt", "r", encoding="utf-8")
+    soupAttendTableList = BeautifulSoup(f.read(), 'html.parser')
     f.close()
 
     # 출석 횟수에 css 적용하기
@@ -100,16 +115,16 @@ with requests.Session() as s:
     p_css = "height: 20px; width: 70px; text-align: center; display: inline-block;"
 
     print("*** 출석 횟수에 css 적용하기 ***")
-    for i in range(0, len(attendCountList)):
-        soupAttendCountList.select("div")[i]['style'] = div_css
-    for i in range(0, len(attendCountList) * 2):
-        soupAttendCountList.select("p")[i]['style'] = p_css
+    for i in range(0, len(attendTableList)):
+        soupAttendTableList.select("div")[i]['style'] = div_css
+    for i in range(0, len(attendTableList) * 2):
+        soupAttendTableList.select("p")[i]['style'] = p_css
 
     # 각 강좌 버튼에 출석 횟수 붙이기
     print("*** 각 강좌 버튼에 출석 횟수 붙이기 ***")
     for course in soup.select(".course_label_re_03"):
-        print(soupAttendCountList.select(".att_count")[0])
-        course.append(soupAttendCountList.select(".att_count")[0])
+        print(soupAttendTableList.select(".att_count")[0])
+        course.append(soupAttendTableList.select(".att_count")[0])
 
     # reformPage.html로 저장
     print("*** reformPage.html로 저장 ***")
