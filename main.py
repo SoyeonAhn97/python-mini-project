@@ -145,7 +145,6 @@ with requests.Session() as s:
     # ...
 
 
-
     print("*** css 적용하기 ***")
     for i in range(0, len(attendTableList)):
         soupAttendTableList.select(".user_attendance_table")[i]['style'] = div_css
