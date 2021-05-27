@@ -53,7 +53,7 @@ with requests.Session() as s:
     courseLinkTag = soup.select('.course_label_re_03 a')
     coursePageList = list()
     attendCountList = list()
-
+    attendTableList = list()
     # a태그 속 href 로 세션만들기
     print("*** a태그 속 href 로 세션만들기 ***")
     for courseLink in courseLinkTag:
