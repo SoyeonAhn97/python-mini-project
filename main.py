@@ -300,7 +300,10 @@ with requests.Session() as s:
             li['style'] = li_active_css
         else:
             li['style'] = li_inactive_css
-
+    for p in soupAttendTableList.select(".sname"):
+        # li 처럼 active, inactive 구분해야함
+        # ...
+        print("")
 
     # 각 강좌 버튼에 진도 현황 붙이기
     print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
