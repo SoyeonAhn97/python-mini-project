@@ -307,7 +307,16 @@ with requests.Session() as s:
             else:
                 #print(p['data-target'], ":", "inactive")
                 p['style'] = p_inactive_css
-
+    for div in soupAttendTableList.select(".att_count"):
+        div['style'] = div_count_css
+    for p in soupAttendTableList.select(".count01"):
+        p['style'] = p_count01_css
+    for p in soupAttendTableList.select(".count02"):
+        p['style'] = p_count02_css
+    for span in soupAttendTableList.select(".count01 > span"):
+        span['style'] = span_count01_css
+    for span in soupAttendTableList.select(".count02 > span"):
+        span['style'] = span_count02_css
 
     # 각 강좌 버튼에 진도 현황 붙이기
     print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
