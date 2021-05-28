@@ -111,8 +111,8 @@ with requests.Session() as s:
 
     # css 적용하기
     div_table_css = "box-sizing : border-box; color : rgb(51, 51, 51); " \
-              "font-family : NanumGothic; font-size : 14px; " \
-              "line-height : 20px; text-size-adjust : 100%; width : 100%;"
+                    "font-family : NanumGothic; font-size : 14px; " \
+                    "line-height : 20px; text-size-adjust : 100%; width : 100%;"
 
     ul_css = "border-top-color : rgb(235, 235, 235); " \
              "border-top-style : solid; border-top-width : 1px; " \
@@ -270,32 +270,37 @@ with requests.Session() as s:
                     "-webkit-tap-highlight-color: rgba(0,0,0,0); "
 
     span_count01_css = "text-size-adjust: 100%; " \
-                        "-webkit-tap-highlight-color: rgba(0,0,0,0); " \
-                        "line-height: 1.42857143; " \
-                        "font-size: 12px; " \
-                        "box-sizing: border-box; " \
-                        "font-family: NanumGothic,dotum,sans-serif; " \
-                        "color: #333; "
+                       "-webkit-tap-highlight-color: rgba(0,0,0,0); " \
+                       "line-height: 1.42857143; " \
+                       "font-size: 12px; " \
+                       "box-sizing: border-box; " \
+                       "font-family: NanumGothic,dotum,sans-serif; " \
+                       "color: #333; "
 
     span_count02_css = "box-sizing: border-box; " \
-                        "color: #333; " \
-                        "font-family: NanumGothic,dotum,sans-serif; " \
-                        "font-size: 12px; " \
-                        "line-height: 1.42857143; " \
-                        "text-size-adjust: 100%; " \
-                        "-webkit-tap-highlight-color: rgba(0,0,0,0); "
+                       "color: #333; " \
+                       "font-family: NanumGothic,dotum,sans-serif; " \
+                       "font-size: 12px; " \
+                       "line-height: 1.42857143; " \
+                       "text-size-adjust: 100%; " \
+                       "-webkit-tap-highlight-color: rgba(0,0,0,0); "
 
     before_count01_css = ""
 
     before_count02_css = ""
 
-
-
     print("*** css 적용하기 ***")
-    for i in range(0, len(attendTableList)):
-        soupAttendTableList.select(".user_attendance_table")[i]['style'] = div_table_css
-    for i in range(0, len(attendTableList)):
-        soupAttendTableList.select(".attendance")[i]['style'] = ul_css
+    for div in soupAttendTableList.select(".user_attendance_table"):
+        div['style'] = div_table_css
+    for ul in soupAttendTableList.select(".attendance"):
+        ul['style'] = ul_css
+    for li in soupAttendTableList.select(".attendance > li"):
+        # class명에 공백이 있어 list형태로 들어와서 1번째와 비교
+        if str(li['class'][1]) == "active":
+            li['style'] = li_active_css
+        else:
+            li['style'] = li_inactive_css
+
 
     # 각 강좌 버튼에 진도 현황 붙이기
     print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
