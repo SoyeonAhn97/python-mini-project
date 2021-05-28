@@ -52,7 +52,7 @@ with requests.Session() as s:
     print("*** a태그 찾기 ***")
     courseLinkTag = soup.select('.course_label_re_03 a')
     coursePageList = list()
-    #attendCountList = list()
+    # attendCountList = list()
     attendTableList = list()
     # a태그 속 href 로 세션만들기
     print("*** a태그 속 href 로 세션만들기 ***")
@@ -65,7 +65,7 @@ with requests.Session() as s:
     for page in coursePageList:
         print(page.text.find('허지욱'))
         html = BeautifulSoup(page.text, 'html.parser')
-        #attendCountList.append(html.select('.att_count'))
+        # attendCountList.append(html.select('.att_count'))
         attendTableList.append(html.select('.user_attendance_table'))
     # 진도 현황 가져와졌는지 출력해보기
     print("*** 진도 현황 가져와졌는지 출력해보기 ***")
@@ -110,7 +110,7 @@ with requests.Session() as s:
     f.close()
 
     # css 적용하기
-    div_css = "box-sizing : border-box; color : rgb(51, 51, 51); " \
+    div_table_css = "box-sizing : border-box; color : rgb(51, 51, 51); " \
               "font-family : NanumGothic; font-size : 14px; " \
               "line-height : 20px; text-size-adjust : 100%; width : 100%;"
 
@@ -137,24 +137,165 @@ with requests.Session() as s:
                       "border-right-color : rgb(235, 235, 235); border-right-style : solid; " \
                       "border-right-width : 1px; list-style-image : none; list-style-position : outside;"
 
-    p_active_css = ""
+    p_active_css = "background-color : rgb(51, 140, 204); " \
+                   "border-bottom-color : rgb(51, 140, 204); " \
+                   "border-bottom-left-radius : 50%; " \
+                   "border-bottom-right-radius : 50%; " \
+                   "border-bottom-style : solid; " \
+                   "border-bottom-width : 1px; " \
+                   "border-image-outset : 0; " \
+                   "border-image-repeat : stretch; " \
+                   "border-image-slice : 100%; " \
+                   "border-image-source : none; " \
+                   "border-image-width : 1; " \
+                   "border-left-color : rgb(51, 140, 204); " \
+                   "border-left-style : solid; " \
+                   "border-left-width : 1px; " \
+                   "border-right-color : rgb(51, 140, 204); " \
+                   "border-right-style : solid; " \
+                   "border-right-width : 1px; " \
+                   "border-top-color : rgb(51, 140, 204); " \
+                   "border-top-left-radius : 50%; " \
+                   "border-top-right-radius : 50%; " \
+                   "border-top-style : solid; " \
+                   "border-top-width : 1px; " \
+                   "box-sizing : border-box; " \
+                   "color : rgb(255, 255, 255); " \
+                   "cursor : pointer; " \
+                   "font-size : 16px; " \
+                   "font-weight : 600; " \
+                   "height : 32px; " \
+                   "line-height : 32px; " \
+                   "list-style-image : none; " \
+                   "list-style-position : outside; " \
+                   "list-style-type : none; " \
+                   "margin-block-end : 10px; " \
+                   "margin-block-start : 13px; " \
+                   "margin-bottom : 10px; " \
+                   "margin-inline-end : 2.875px; " \
+                   "margin-inline-start : 2.875px; " \
+                   "margin-left : 2.875px; " \
+                   "margin-right : 2.875px; " \
+                   "margin-top : 13px; " \
+                   "text-align : center; " \
+                   "text-size-adjust : 100%; " \
+                   "width : 32px;"
 
-    p_inactive_css = ""
+    p_inactive_css = "box-sizing : border-box; " \
+                     "display : block; " \
+                     "height : 32px; " \
+                     "margin-bottom : 10px; " \
+                     "margin-left : 2.875px; " \
+                     "margin-right : 2.875px; " \
+                     "margin-top : 13px; " \
+                     "width : 32px; " \
+                     "font-size : 16px; " \
+                     "font-weight : 600; " \
+                     "line-height : 32px; " \
+                     "text-align : center; " \
+                     "text-size-adjust : 100%; " \
+                     "color : rgb(153, 153, 153); " \
+                     "border-bottom-color : rgb(204, 204, 204); " \
+                     "border-bottom-style : solid; " \
+                     "border-bottom-width : 1px; " \
+                     "border-image-outset : 0; " \
+                     "border-image-repeat : stretch; " \
+                     "border-image-slice : 100%; " \
+                     "border-image-source : none; " \
+                     "border-image-width : 1; " \
+                     "border-left-color : rgb(204, 204, 204); " \
+                     "border-left-style : solid; " \
+                     "border-left-width : 1px; " \
+                     "border-right-color : rgb(204, 204, 204); " \
+                     "border-right-style : solid; " \
+                     "border-right-width : 1px; " \
+                     "border-top-color : rgb(204, 204, 204); " \
+                     "border-top-style : solid; " \
+                     "border-top-width : 1px; " \
+                     "cursor : pointer; " \
+                     "border-bottom-left-radius : 50%; " \
+                     "border-bottom-right-radius : 50%; " \
+                     "border-top-left-radius : 50%; " \
+                     "border-top-right-radius : 50%; " \
+                     "list-style-image : none; " \
+                     "list-style-position : outside; " \
+                     "list-style-type : none; " \
+                     "margin-block-end : 10px; " \
+                     "margin-block-start : 13px; " \
+                     "margin-inline-end : 2.875px; " \
+                     "margin-inline-start : 2.875px; "
 
     # att_count 하위 css 필요
-    # ...
+
+    div_count_css = "text-size-adjust: 100%; " \
+                    "-webkit-tap-highlight-color: rgba(0,0,0,0); " \
+                    "line-height: 1.42857143; " \
+                    "color: #333; " \
+                    "box-sizing: border-box; " \
+                    "font-family: NanumGothic, dotum, sans-serif; " \
+                    "font-size: 12px; " \
+                    "margin-top: 10px; "
+
+    p_count01_css = "text-size-adjust: 100%; " \
+                    "-webkit-tap-highlight-color: rgba(0,0,0,0); " \
+                    "line-height: 1.42857143; " \
+                    "font-size: 12px; " \
+                    "box-sizing: border-box; " \
+                    "margin: 0 0 10px; " \
+                    "font-family: NanumGothic,dotum,Helvetica,sans-serif,AppleGothic; " \
+                    "float: left; " \
+                    "color: #999; " \
+                    "padding: 0 15px; "
+
+    p_count02_css = "box-sizing: border-box; " \
+                    "color: #999; " \
+                    "display: block; " \
+                    "float: left; " \
+                    "font-family: NanumGothic,dotum,Helvetica,sans-serif,AppleGothic; " \
+                    "font-size: 12px; " \
+                    "line-height: 1.42857143; " \
+                    "margin-block-end: 10px; " \
+                    "margin-block-start: 0px; " \
+                    "margin-bottom: 10px; " \
+                    "margin-inline-end: 0px; " \
+                    "margin-inline-start: 0px; " \
+                    "margin-left: 0px; " \
+                    "margin-right: 0px; " \
+                    "margin-top: 0px; " \
+                    "padding-bottom: 0px; " \
+                    "padding-left: 15px; " \
+                    "padding-right: 15px; " \
+                    "padding-top: 0px; " \
+                    "text-size-adjust: 100%; " \
+                    "-webkit-tap-highlight-color: rgba(0,0,0,0); "
+
+    span_count01_css = "text-size-adjust: 100%; " \
+                        "-webkit-tap-highlight-color: rgba(0,0,0,0); " \
+                        "line-height: 1.42857143; " \
+                        "font-size: 12px; " \
+                        "box-sizing: border-box; " \
+                        "font-family: NanumGothic,dotum,sans-serif; " \
+                        "color: #333; "
+
+    span_count02_css = "box-sizing: border-box; " \
+                        "color: #333; " \
+                        "font-family: NanumGothic,dotum,sans-serif; " \
+                        "font-size: 12px; " \
+                        "line-height: 1.42857143; " \
+                        "text-size-adjust: 100%; " \
+                        "-webkit-tap-highlight-color: rgba(0,0,0,0); "
+
+    before_count01_css = ""
+
+    before_count02_css = ""
+
 
 
     print("*** css 적용하기 ***")
     for i in range(0, len(attendTableList)):
-        soupAttendTableList.select(".user_attendance_table")[i]['style'] = div_css
+        soupAttendTableList.select(".user_attendance_table")[i]['style'] = div_table_css
     for i in range(0, len(attendTableList)):
         soupAttendTableList.select(".attendance")[i]['style'] = ul_css
-    for i in range(0, len(attendTableList) * 16):
-        # if li .class가 active 일 때
-        # p_active_css 적용
-        # else (inactive) 일 때
-        # p_inactive_css 적용
 
     # 각 강좌 버튼에 진도 현황 붙이기
     print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
