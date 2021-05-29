@@ -372,7 +372,7 @@ with requests.Session() as s:
         for p in soupAttendTableList.select(".sname"):
             if str(li['class'][1]) == "active":
                 if str(li['class'][2]) == "name_text1":
-                    print("출석 css 적용됨")
+                    print("출석 css 적용됨 ")
                     p['style'] = p_active01_css
                 else:
                     print("결석 css 적용됨")
