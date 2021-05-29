@@ -399,13 +399,20 @@ with requests.Session() as s:
     for li in soupAttendTableList.select(".attendance > li"):
         # class명에 공백이 있어 list형태로 들어와서 1번째와 비교
         if str(li['class'][1]) == "active":
-            li['style'] = li_active_css
+            print(li.get_text())
+            if li.get_text() == "출석":
+                li['style'] = li_active01_css
+            else:
+                li['style'] = li_active02_css
         else:
             li['style'] = li_inactive_css
         for p in soupAttendTableList.select(".sname"):
             if str(li['class'][1]) == "active":
                 # print(p['data-target'], ":", "active")
-                p['style'] = p_active_css
+                if li.string == "출석":
+                    p['style'] = p_active01_css
+                else:
+                    p['style'] = p_active02_css
             else:
                 # print(p['data-target'], ":", "inactive")
                 p['style'] = p_inactive_css
