@@ -149,7 +149,8 @@ with requests.Session() as s:
                       "border-right-width : 1px; list-style-image : none; list-style-position : outside;" \
                       "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
-    p_active01_css = "background-color : rgb(51, 140, 204); " \
+    p_active01_css = "descript : active01; "\
+                     "background-color : rgb(51, 140, 204); " \
                      "border-bottom-color : rgb(51, 140, 204); " \
                      "border-bottom-left-radius : 50%; " \
                      "border-bottom-right-radius : 50%; " \
@@ -194,7 +195,8 @@ with requests.Session() as s:
                      "width : 32px;" \
                      "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
-    p_active02_css = "background-color : rgb(220, 86, 72); " \
+    p_active02_css = "descript : active02; "\
+                     "background-color : rgb(220, 86, 72); " \
                      "border-bottom-color : rgb(220, 86, 72); " \
                      "border-bottom-left-radius : 50%; " \
                      "border-bottom-right-radius : 50%; " \
@@ -239,7 +241,8 @@ with requests.Session() as s:
                      "width : 32px;" \
                      "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
-    p_inactive_css = "box-sizing : border-box; " \
+    p_inactive_css = "descript : inactive; "\
+                     "box-sizing : border-box; " \
                      "display : block; " \
                      "height : 32px; " \
                      "margin-bottom : 10px; " \
@@ -283,49 +286,6 @@ with requests.Session() as s:
                      "margin-inline-end : 2.875px; " \
                      "margin-inline-start : 2.875px; "
 
-    p_active01_css = "background-color : rgb(51, 140, 204); " \
-                     "border-bottom-color : rgb(51, 140, 204); " \
-                     "border-bottom-left-radius : 50%; " \
-                     "border-bottom-right-radius : 50%; " \
-                     "border-bottom-style : solid; " \
-                     "border-bottom-width : 1px; " \
-                     "border-image-outset : 0; " \
-                     "border-image-repeat : stretch; " \
-                     "border-image-slice : 100%; " \
-                     "border-image-source : none; " \
-                     "border-image-width : 1; " \
-                     "border-left-color : rgb(51, 140, 204); " \
-                     "border-left-style : solid; " \
-                     "border-left-width : 1px; " \
-                     "border-right-color : rgb(51, 140, 204); " \
-                     "border-right-style : solid; " \
-                     "border-right-width : 1px; " \
-                     "border-top-color : rgb(51, 140, 204); " \
-                     "border-top-left-radius : 50%; " \
-                     "border-top-right-radius : 50%; " \
-                     "border-top-style : solid; " \
-                     "border-top-width : 1px; " \
-                     "box-sizing : border-box; " \
-                     "color : rgb(255, 255, 255); " \
-                     "cursor : pointer; " \
-                     "font-size : 16px; " \
-                     "font-weight : 600; " \
-                     "height : 32px; " \
-                     "line-height : 32px; " \
-                     "list-style-image : none; " \
-                     "list-style-position : outside; " \
-                     "list-style-type : none; " \
-                     "margin-block-end : 10px; " \
-                     "margin-block-start : 13px; " \
-                     "margin-bottom : 10px; " \
-                     "margin-inline-end : 2.875px; " \
-                     "margin-inline-start : 2.875px; " \
-                     "margin-left : 2.875px; " \
-                     "margin-right : 2.875px; " \
-                     "margin-top : 13px; " \
-                     "text-align : center; " \
-                     "text-size-adjust : 100%; " \
-                     "width : 32px;"
 
     # att_count 하위 css 필요
 
@@ -412,10 +372,13 @@ with requests.Session() as s:
         for p in soupAttendTableList.select(".sname"):
             if str(li['class'][1]) == "active":
                 if str(li['class'][2]) == "name_text1":
+                    print("출석 css 적용됨")
                     p['style'] = p_active01_css
                 else:
+                    print("결석 css 적용됨")
                     p['style'] = p_active02_css
             else:
+                print("빈칸 css 적용됨")
                 p['style'] = p_inactive_css
 
     for div in soupAttendTableList.select(".att_count"):
@@ -436,7 +399,6 @@ with requests.Session() as s:
     # 각 강좌 버튼에 진도 현황 붙이기
     print("*** 각 강좌 버튼에 진도 현황 붙이기 ***")
     for course in soup.select(".course_label_re_03"):
-        print(soupAttendTableList.select(".user_attendance_table")[0])
         course.append(soupAttendTableList.select(".user_attendance_table")[0])
 
     # reformPage.html로 저장
