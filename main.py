@@ -122,12 +122,23 @@ with requests.Session() as s:
              "line-height : 20px; list-style-image : none; " \
              "list-style-position : outside; list-style-type : none;"
 
-    li_active_css = "background-color : rgb(255, 255, 255); " \
-                    "border-right-color : rgb(235, 235, 235); " \
-                    "border-right-style : solid; border-right-width : 1px; " \
-                    "box-sizing : border-box; color : rgb(42, 123, 205); " \
-                    "display : list-item; float : left; font-weight : 600; " \
-                    "height : 80px;"
+    li_active01_css = "box-sizing : border-box; display : list-item; " \
+                      "float : left; height : 80px; width : 38.75px; " \
+                      "font-size : 12px; font-weight : 600; line-height : 17.1429.px; " \
+                      "text-align : center; text-size-adjust : 100%; " \
+                      "color : rgb(42, 123, 205); background-color : rgb(255, 255, 255); " \
+                      "border-right-color : rgb(235, 235, 235); border-right-style : solid; " \
+                      "border-right-width : 1px; list-style-image : none; list-style-position : outside;" \
+                      "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
+
+    li_active02_css = "box-sizing : border-box; display : list-item; " \
+                      "float : left; height : 80px; width : 38.75px; " \
+                      "font-size : 12px; font-weight : 600; line-height : 17.1429.px; " \
+                      "text-align : center; text-size-adjust : 100%; " \
+                      "color : rgb(220, 86, 72); background-color : rgb(255, 255, 255); " \
+                      "border-right-color : rgb(235, 235, 235); border-right-style : solid; " \
+                      "border-right-width : 1px; list-style-image : none; list-style-position : outside;" \
+                      "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
     li_inactive_css = "box-sizing : border-box; display : list-item; " \
                       "float : left; height : 80px; width : 38.75px; " \
@@ -135,51 +146,98 @@ with requests.Session() as s:
                       "text-align : center; text-size-adjust : 100%; " \
                       "color : rgb(153, 153, 153); background-color : rgb(245, 245, 246); " \
                       "border-right-color : rgb(235, 235, 235); border-right-style : solid; " \
-                      "border-right-width : 1px; list-style-image : none; list-style-position : outside;"
+                      "border-right-width : 1px; list-style-image : none; list-style-position : outside;" \
+                      "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
-    p_active_css = "background-color : rgb(51, 140, 204); " \
-                   "border-bottom-color : rgb(51, 140, 204); " \
-                   "border-bottom-left-radius : 50%; " \
-                   "border-bottom-right-radius : 50%; " \
-                   "border-bottom-style : solid; " \
-                   "border-bottom-width : 1px; " \
-                   "border-image-outset : 0; " \
-                   "border-image-repeat : stretch; " \
-                   "border-image-slice : 100%; " \
-                   "border-image-source : none; " \
-                   "border-image-width : 1; " \
-                   "border-left-color : rgb(51, 140, 204); " \
-                   "border-left-style : solid; " \
-                   "border-left-width : 1px; " \
-                   "border-right-color : rgb(51, 140, 204); " \
-                   "border-right-style : solid; " \
-                   "border-right-width : 1px; " \
-                   "border-top-color : rgb(51, 140, 204); " \
-                   "border-top-left-radius : 50%; " \
-                   "border-top-right-radius : 50%; " \
-                   "border-top-style : solid; " \
-                   "border-top-width : 1px; " \
-                   "box-sizing : border-box; " \
-                   "color : rgb(255, 255, 255); " \
-                   "cursor : pointer; " \
-                   "font-size : 16px; " \
-                   "font-weight : 600; " \
-                   "height : 32px; " \
-                   "line-height : 32px; " \
-                   "list-style-image : none; " \
-                   "list-style-position : outside; " \
-                   "list-style-type : none; " \
-                   "margin-block-end : 10px; " \
-                   "margin-block-start : 13px; " \
-                   "margin-bottom : 10px; " \
-                   "margin-inline-end : 2.875px; " \
-                   "margin-inline-start : 2.875px; " \
-                   "margin-left : 2.875px; " \
-                   "margin-right : 2.875px; " \
-                   "margin-top : 13px; " \
-                   "text-align : center; " \
-                   "text-size-adjust : 100%; " \
-                   "width : 32px;"
+    p_active01_css = "background-color : rgb(51, 140, 204); " \
+                     "border-bottom-color : rgb(51, 140, 204); " \
+                     "border-bottom-left-radius : 50%; " \
+                     "border-bottom-right-radius : 50%; " \
+                     "border-bottom-style : solid; " \
+                     "border-bottom-width : 1px; " \
+                     "border-image-outset : 0; " \
+                     "border-image-repeat : stretch; " \
+                     "border-image-slice : 100%; " \
+                     "border-image-source : none; " \
+                     "border-image-width : 1; " \
+                     "border-left-color : rgb(51, 140, 204); " \
+                     "border-left-style : solid; " \
+                     "border-left-width : 1px; " \
+                     "border-right-color : rgb(51, 140, 204); " \
+                     "border-right-style : solid; " \
+                     "border-right-width : 1px; " \
+                     "border-top-color : rgb(51, 140, 204); " \
+                     "border-top-left-radius : 50%; " \
+                     "border-top-right-radius : 50%; " \
+                     "border-top-style : solid; " \
+                     "border-top-width : 1px; " \
+                     "box-sizing : border-box; " \
+                     "color : rgb(255, 255, 255); " \
+                     "cursor : pointer; " \
+                     "font-size : 16px; " \
+                     "font-weight : 600; " \
+                     "height : 32px; " \
+                     "line-height : 32px; " \
+                     "list-style-image : none; " \
+                     "list-style-position : outside; " \
+                     "list-style-type : none; " \
+                     "margin-block-end : 10px; " \
+                     "margin-block-start : 13px; " \
+                     "margin-bottom : 10px; " \
+                     "margin-inline-end : 2.875px; " \
+                     "margin-inline-start : 2.875px; " \
+                     "margin-left : 2.875px; " \
+                     "margin-right : 2.875px; " \
+                     "margin-top : 13px; " \
+                     "text-align : center; " \
+                     "text-size-adjust : 100%; " \
+                     "width : 32px;" \
+                     "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
+
+    p_active02_css = "background-color : rgb(220, 86, 72); " \
+                     "border-bottom-color : rgb(220, 86, 72); " \
+                     "border-bottom-left-radius : 50%; " \
+                     "border-bottom-right-radius : 50%; " \
+                     "border-bottom-style : solid; " \
+                     "border-bottom-width : 1px; " \
+                     "border-image-outset : 0; " \
+                     "border-image-repeat : stretch; " \
+                     "border-image-slice : 100%; " \
+                     "border-image-source : none; " \
+                     "border-image-width : 1; " \
+                     "border-left-color : rgb(220, 86, 72); " \
+                     "border-left-style : solid; " \
+                     "border-left-width : 1px; " \
+                     "border-right-color : rgb(220, 86, 72); " \
+                     "border-right-style : solid; " \
+                     "border-right-width : 1px; " \
+                     "border-top-color : rgb(220, 86, 72); " \
+                     "border-top-left-radius : 50%; " \
+                     "border-top-right-radius : 50%; " \
+                     "border-top-style : solid; " \
+                     "border-top-width : 1px; " \
+                     "box-sizing : border-box; " \
+                     "color : rgb(255, 255, 255); " \
+                     "cursor : pointer; " \
+                     "font-size : 16px; " \
+                     "font-weight : 600; " \
+                     "height : 32px; " \
+                     "line-height : 32px; " \
+                     "list-style-image : none; " \
+                     "list-style-position : outside; " \
+                     "list-style-type : none; " \
+                     "margin-block-end : 10px; " \
+                     "margin-block-start : 13px; " \
+                     "margin-bottom : 10px; " \
+                     "margin-inline-end : 2.875px; " \
+                     "margin-inline-start : 2.875px; " \
+                     "margin-left : 2.875px; " \
+                     "margin-right : 2.875px; " \
+                     "margin-top : 13px; " \
+                     "text-align : center; " \
+                     "text-size-adjust : 100%; " \
+                     "width : 32px;" \
+                     "-webkit-tap-highlight-color : rgba(0, 0, 0, 0); "
 
     p_inactive_css = "box-sizing : border-box; " \
                      "display : block; " \
@@ -224,6 +282,50 @@ with requests.Session() as s:
                      "margin-block-start : 13px; " \
                      "margin-inline-end : 2.875px; " \
                      "margin-inline-start : 2.875px; "
+
+    p_active01_css = "background-color : rgb(51, 140, 204); " \
+                     "border-bottom-color : rgb(51, 140, 204); " \
+                     "border-bottom-left-radius : 50%; " \
+                     "border-bottom-right-radius : 50%; " \
+                     "border-bottom-style : solid; " \
+                     "border-bottom-width : 1px; " \
+                     "border-image-outset : 0; " \
+                     "border-image-repeat : stretch; " \
+                     "border-image-slice : 100%; " \
+                     "border-image-source : none; " \
+                     "border-image-width : 1; " \
+                     "border-left-color : rgb(51, 140, 204); " \
+                     "border-left-style : solid; " \
+                     "border-left-width : 1px; " \
+                     "border-right-color : rgb(51, 140, 204); " \
+                     "border-right-style : solid; " \
+                     "border-right-width : 1px; " \
+                     "border-top-color : rgb(51, 140, 204); " \
+                     "border-top-left-radius : 50%; " \
+                     "border-top-right-radius : 50%; " \
+                     "border-top-style : solid; " \
+                     "border-top-width : 1px; " \
+                     "box-sizing : border-box; " \
+                     "color : rgb(255, 255, 255); " \
+                     "cursor : pointer; " \
+                     "font-size : 16px; " \
+                     "font-weight : 600; " \
+                     "height : 32px; " \
+                     "line-height : 32px; " \
+                     "list-style-image : none; " \
+                     "list-style-position : outside; " \
+                     "list-style-type : none; " \
+                     "margin-block-end : 10px; " \
+                     "margin-block-start : 13px; " \
+                     "margin-bottom : 10px; " \
+                     "margin-inline-end : 2.875px; " \
+                     "margin-inline-start : 2.875px; " \
+                     "margin-left : 2.875px; " \
+                     "margin-right : 2.875px; " \
+                     "margin-top : 13px; " \
+                     "text-align : center; " \
+                     "text-size-adjust : 100%; " \
+                     "width : 32px;"
 
     # att_count 하위 css 필요
 
@@ -302,10 +404,10 @@ with requests.Session() as s:
             li['style'] = li_inactive_css
         for p in soupAttendTableList.select(".sname"):
             if str(li['class'][1]) == "active":
-                #print(p['data-target'], ":", "active")
+                # print(p['data-target'], ":", "active")
                 p['style'] = p_active_css
             else:
-                #print(p['data-target'], ":", "inactive")
+                # print(p['data-target'], ":", "inactive")
                 p['style'] = p_inactive_css
     for div in soupAttendTableList.select(".att_count"):
         div['style'] = div_count_css
