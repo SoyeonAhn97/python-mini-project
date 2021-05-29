@@ -394,36 +394,42 @@ with requests.Session() as s:
     print("*** css 적용하기 ***")
     for div in soupAttendTableList.select(".user_attendance_table"):
         div['style'] = div_table_css
+
     for ul in soupAttendTableList.select(".attendance"):
         ul['style'] = ul_css
+
     for li in soupAttendTableList.select(".attendance > li"):
-        # class명에 공백이 있어 list형태로 들어와서 1번째와 비교
+        # class명에 공백이 있어 list형태로 들어와서 1번째와 비교 (아래 형태)
+        # ['attendance_section', 'active', 'name_text1', 'piece_16']
         if str(li['class'][1]) == "active":
-            print(" ",li.get_text())
-            if li.get_text() == "출석":
+            if str(li['class'][2]) == "name_text1":
                 li['style'] = li_active01_css
             else:
                 li['style'] = li_active02_css
         else:
             li['style'] = li_inactive_css
+
         for p in soupAttendTableList.select(".sname"):
             if str(li['class'][1]) == "active":
-                # print(p['data-target'], ":", "active")
-                if li.string == "출석":
+                if str(li['class'][2]) == "name_text1":
                     p['style'] = p_active01_css
                 else:
                     p['style'] = p_active02_css
             else:
-                # print(p['data-target'], ":", "inactive")
                 p['style'] = p_inactive_css
+
     for div in soupAttendTableList.select(".att_count"):
         div['style'] = div_count_css
+
     for p in soupAttendTableList.select(".count01"):
         p['style'] = p_count01_css
+
     for p in soupAttendTableList.select(".count02"):
         p['style'] = p_count02_css
+
     for span in soupAttendTableList.select(".count01 > span"):
         span['style'] = span_count01_css
+
     for span in soupAttendTableList.select(".count02 > span"):
         span['style'] = span_count02_css
 
