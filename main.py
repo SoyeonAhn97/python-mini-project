@@ -18,12 +18,6 @@ LOGIN_DATA = {
     'password': input("password : ")
 }
 
-# #*** 테스트용 ***#
-# LOGIN_DATA = {
-#     'username': '201704049',
-#     'password': '****'
-# }
-
 # Session 생성, with 구문 안에서 세션 유지, with 를 벗어나면 자동으로 세션 종료
 with requests.Session() as s:
     # index.php에 로그인 요청 
@@ -43,10 +37,6 @@ with requests.Session() as s:
     # 기존 메인 페이지 soup 만들기
     print("*** 기존 메인 페이지 soup 만들기 ***")
     soup = BeautifulSoup(page.text, 'html.parser')
-
-    # f = open("originPage.html", "w", encoding="utf-8")
-    # f.write(page.text)
-    # f.close()
 
     # a태그 찾기
     print("*** a태그 찾기 ***")
@@ -72,22 +62,6 @@ with requests.Session() as s:
     for div in attendTableList:
         print(div)
 
-    # CSS 가져와서 css.text 에 저장
-    # print("*** CSS 가져와서 css.text 에 저장 ***")
-    # css = s.get(CSS_URL)
-    # f = open("css.txt", "w", encoding="utf-8")
-    # f.write(css.text)
-    # f.close()
-
-    # attendCountList 를 attendCountList.txt 파일로 저장
-    # print("*** attendCountList 를 attendCountList.txt 파일로 저장 ***")
-    # f = open("attendCountList.txt", "w", encoding="utf-8")
-    # f.write("")
-    # f = open("attendCountList.txt", "a", encoding="utf-8")
-    # for div in attendCountList:
-    #     f.write(str(div))
-    # f.close()
-
     # attendTableList 를 attendTableList.txt 파일로 저장
     print("*** attendTableList 를 attendTableList.txt 파일로 저장 ***")
     f = open("attendTableList.txt", "w", encoding="utf-8")
@@ -96,12 +70,6 @@ with requests.Session() as s:
     for div in attendTableList:
         f.write(str(div))
     f.close()
-
-    # attendCountList.txt 파일을 soup 으로 만듬
-    # print("*** attendCountList.txt 파일을 soup 으로 만듬 ***")
-    # f = open("attendCountList.txt", "r", encoding="utf-8")
-    # soupAttendCountList = BeautifulSoup(f.read(), 'html.parser')
-    # f.close()
 
     # attendTableList.txt 파일을 soup 으로 만듬
     print("*** attendTableList.txt 파일을 soup 으로 만듬 ***")
@@ -364,22 +332,13 @@ with requests.Session() as s:
         if str(li['class'][1]) == "active":
             if str(li['class'][2]) == "name_text1":
                 li['style'] = li_active01_css
+                li.select_one(".sname")['style'] = p_active01_css
             else:
                 li['style'] = li_active02_css
+                li.select_one(".sname")['style'] = p_active02_css
         else:
             li['style'] = li_inactive_css
-
-        for p in soupAttendTableList.select(".sname"):
-            if str(li['class'][1]) == "active":
-                if str(li['class'][2]) == "name_text1":
-                    print("출석 css 적용됨 ")
-                    p['style'] = p_active01_css
-                else:
-                    print("결석 css 적용됨")
-                    p['style'] = p_active02_css
-            else:
-                print("빈칸 css 적용됨")
-                p['style'] = p_inactive_css
+            li.select_one(".sname")['style'] = p_inactive_css
 
     for div in soupAttendTableList.select(".att_count"):
         div['style'] = div_count_css
