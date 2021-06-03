@@ -1,3 +1,13 @@
-# python-mini-project
-파이썬 프로젝트
-![image](https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png)
+# KNU 이러닝캠퍼스 UI 개선하기
+***
+## 프로젝트 배경
+>코로나로 인해 대부분의 수업을 비대면으로 진행하게 되면서 대부분의 시간을 학교가 아닌 이러닝 캠퍼스에서 보내게 되었습니다. 학생들이 이러닝 캠퍼스에서 가장 많이 이용하는 부분은 온라인 수업을 듣고 출석이 잘되었나 확인하는 부분이었는데, 기존의 이러닝 캠퍼스에서는 과목을 하나하나 들어가 확인해야만 했습니다. 
+
+## 구조
+
+## Before & After
+<img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
+
+
+
+***
