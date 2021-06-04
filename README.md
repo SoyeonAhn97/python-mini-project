@@ -13,7 +13,7 @@
 **main.py를 실행**하고 콘솔창에 **학번과 비밀번호를 입력**하면 'reformPage.html' 파일이 생기고 크롬에서 열리게 됩니다.
 
 ## 결과( Before )
-<img src="https://user-images.githubusercontent.com/60254939/120753942-eb3da380-c546-11eb-9a4a-86333019c13e.png"  width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/60254939/120756059-bf6fed00-c549-11eb-9176-f233f43225f2.png"  width="80%" height="80%">
 
 ## 결과( After )
 <img src="https://user-images.githubusercontent.com/60254939/120755931-918aa880-c549-11eb-865e-c31644a70c32.png"  width="80%" height="80%">
