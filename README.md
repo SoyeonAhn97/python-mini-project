@@ -5,7 +5,9 @@
 
 ## 사용 모듈
 * BeautifulSoup
-* Webbrowser
+* Webbrowser ( 수정된 html을 크롬에서 열기 위해 사용합니다. )
+* Platform ( 사용자의 OS를 판별하기 위해 사용합니다. )
+* requests ( 로그인 및 페이지 이동을 위해 세션 생성에 사용됩니다. )
 
 ## 사용 방법
 >콘솔로 로그인하면 자동으로 크롬이 열림
