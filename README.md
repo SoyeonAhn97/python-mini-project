@@ -6,10 +6,10 @@
 ## 구조
 >이러닝 캠퍼스 로그인 -> BeautifulSoup을 이용해 페이지 html 파싱 -> href 태그를 이용해 각 과목 페이지 접근 -> 출석 현황 html 코드 파싱 -> 메인페이지 html에 삽입 -> webbrowser 모듈을 이용해 수정된 html을 크롬으로 엽니다
 
-## Before
+## 결과( Before )
 <img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
 
-## After
+## 결과( After )
 <img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
 
 
