@@ -16,7 +16,7 @@
 <img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
 
 ## 결과( After )
-<img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/60254939/120753835-bb8e9b80-c546-11eb-9d9a-53b5d5b7f6b9.png"  width="80%" height="80%">
 
 ## 코드 구현
 1. 이러닝 캠퍼스 로그인
