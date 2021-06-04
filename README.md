@@ -5,8 +5,12 @@
 
 ## 구조
 
-## Before & After
+## Before
 <img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
+
+## After
+<img src="https://user-images.githubusercontent.com/60254939/120596007-2c1db580-c47e-11eb-852a-e4d630092252.png"  width="80%" height="80%">
+
 
 
 
