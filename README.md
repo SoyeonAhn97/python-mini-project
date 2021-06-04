@@ -18,7 +18,7 @@
 ## 결과( After )
 <img src="https://user-images.githubusercontent.com/60254939/120753835-bb8e9b80-c546-11eb-9d9a-53b5d5b7f6b9.png"  width="80%" height="80%">
 
-## 코드 구현
+## 동작 구조
 1. 이러닝 캠퍼스 로그인
 2. BeautifulSoup을 이용해 페이지 html 파싱
 3. href 태그를 이용해 각 과목 페이지 접근
