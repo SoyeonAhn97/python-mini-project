@@ -24,10 +24,10 @@
 <img src="https://user-images.githubusercontent.com/60254939/120756409-2e4d4600-c54a-11eb-8d8e-0e9ed57050e6.png"  width="40%" height="40%">
 
 ## 결과( Before )
-<img src="https://user-images.githubusercontent.com/60254939/120756059-bf6fed00-c549-11eb-9176-f233f43225f2.png"  width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/60254939/120756059-bf6fed00-c549-11eb-9176-f233f43225f2.png"  width="90%" height="90%">
 
 ## 결과( After )
-<img src="https://user-images.githubusercontent.com/60254939/120755931-918aa880-c549-11eb-865e-c31644a70c32.png"  width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/60254939/120755931-918aa880-c549-11eb-865e-c31644a70c32.png"  width="90%" height="90%">
 
 
 
