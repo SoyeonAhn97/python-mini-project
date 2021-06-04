@@ -16,7 +16,7 @@
 <img src="https://user-images.githubusercontent.com/60254939/120753942-eb3da380-c546-11eb-9a4a-86333019c13e.png"  width="80%" height="80%">
 
 ## 결과( After )
-<img src="https://user-images.githubusercontent.com/60254939/120753835-bb8e9b80-c546-11eb-9d9a-53b5d5b7f6b9.png"  width="80%" height="80%">
+<img src="https://user-images.githubusercontent.com/60254939/120755931-918aa880-c549-11eb-865e-c31644a70c32.png"  width="80%" height="80%">
 
 ## 동작 구조
 1. 이러닝 캠퍼스 로그인
