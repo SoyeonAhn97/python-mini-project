@@ -7,7 +7,7 @@
 * **BeautifulSoup**
 * **Webbrowser**
 * **Platform**
-* **requests**
+* **Requests**
 
 ## 동작 구조
 1. Session을 통한 이러닝 캠퍼스 로그인
